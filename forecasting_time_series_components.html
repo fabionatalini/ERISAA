@@ -16,6 +16,10 @@ La descomposición de las series se hará con <b><i>STL</i></b> (<i>seasonal dec
 En la predicción de las tendencias, los dos métodos devuelven resultados muy parecidos. En la predicción de las componentes semanal y anual, el método de <b>Holt-Winters es más preciso en algunos casos, y tan preciso como el auto-arima en otros</b>.
 Cuando el periodo de predicción se extiende de 90 días a 180 o 270 días, la precisión en las componentes predichas semanal y anual baja en varios casos y sube o no varía en otros casos. Pero <b>el error en las predicciones de las tendencias sube siempre y considerablemente cuando el periodo de predicción se extiende</b>, y esto ocurre con ambos métodos de modelización.
 
+<h3><a href="EDA_trend_season_forecast_GRP.html" target="_blank">GRP</a></h3>
+
+Las consideraciones que podemos hacer acerca de las proyecciones de las componentes temporales de las series de GRP coinciden en general con las que hicimos para las series de minutos de consumo. El método de Holt-Winters suele ofrecer predicciones más precisas, aunque volvemos a observar errores en las proyecciones de las tendencias, errores que se acentúan considerablemente con periodos de predicción más amplios.
+
 <h1>Conclusiones</h1>
 
 Los modelos ARIMA son quizá los más utilizados en análisis y pronóstico de series temporales. Sin embargo, los parámetros de un modelo ARIMA estacional son muchos, la calibración suele precisar de un atento enfoque analítico para determinar los grados de diferenciación, autocorrelación y media móvil, y el resultado de un auto-arima debería tomarse más bien como punto de partida o modelo baseline. Cuando se dan las condiciones para realizar un análisis de esta índole, quizá la modelización ARIMA sea la más recomendable. Sin embargo, la modelización con suavizados exponenciales ha demostrado ser efectiva en muchas aplicaciones y su formalización es más sencilla que la de un modelo ARIMA. Además, ya que el número de modelos a realizar para el proyecto Foresight es alto, un enfoque analítico para cada modelo es inviable.<br><br>
