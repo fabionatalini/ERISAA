@@ -2656,25 +2656,40 @@ computacionales y de desarrollo</u>.<br> Por otro lado, <u>si
 siguiéramos el criterio 2 (descomponer por franja) quizá podríamos
 llegar a un nivel de precisión mayor</u> a la hora de definir (y
 proyectar en la fase de <em>forecast</em>) las tendencias. Esto volvería
-a aumentar el número de modelos a desarrollar<br><br> El numero de
-modelos entrenados en el primer desarrollo del proyecto tuvimos (sin
-contar que había tres KPI: audiencia, inversión y ocupación) fue:</p>
-<pre class="r"><code># 30 cadenas, 7 targets, 6 franjas
-expand.grid(c(1:30),c(1:7),c(1:6)) |&gt; nrow()</code></pre>
-<pre><code>## [1] 1260</code></pre>
-<p>En esta nueva fase de desarrollo del proyecto, si utilizáramos el
-<code>mstl</code> el número de modelos a desarrollar sería 30 (30
-cadenas, sin contar que los KPI serían dos: GRP y minutos de
-consumo).<br> Y si si eligiéramos descomponer las franjas por separado,
-el numero de modelos a desarrollar sería:</p>
-<pre class="r"><code># 30 cadenas, 1 targets, 6 franjas
-expand.grid(c(1:30),c(1:6)) |&gt; nrow()</code></pre>
-<pre><code>## [1] 180</code></pre>
-<p>Al haber sintetizado el proyecto en un solo target (y en sólo dos
-KPI), el coste de modelización seguiría siendo inferior al original
-aunque eligiéramos la descomposición temporal por franjas.<br><br>
-<b><u>La recomendación para el desarrollo del proyecto es realizar un
-modelo por combinación cadena-franja.</b></u></p>
+a aumentar el número de modelos a desarrollar<br><br> En el primer
+desarrollo del proyecto tuvimos 30 cadenas, 7 targets, 6 franjas y 3 kpi
+(inversión, audiencia y ocupación). Dos de los tres kpi (audiencia y
+ocupación) se modelizaron para cada combinación cadena-target. El kpi de
+inversión era un dato numérico segmentado a nivel fecha (diaria), cadena
+y sector; el sector se refería al sector económico o mercado del
+anunciante, y había 13 sectores (alimentación, automoción, bebidas,
+belleza, deportes, distribución, finanzas, hogar, limpieza, servicios,
+telecomunicaciones, textil, transporte). Se entrenó un modelo para cada
+combinación cadena-sector. Así finalmente había el numero de modelos en
+el primer desarrollo del proyecto fue:</p>
+<pre class="r"><code># 30 cadenas * 7 targets * 2 kpi + 30 cadenas * 13 sectores * 1 kpi
+nrow(expand.grid(c(1:30),c(1:7)))*2 + nrow(expand.grid(c(1:30),c(1:13)))</code></pre>
+<pre><code>## [1] 810</code></pre>
+<p>En esta nueva fase de desarrollo del proyecto, modelizamos un solo
+target (<em>ind. 4+</em>) y sólo dos kpi (audiencia e inversión; la
+ocupación se calcularía <em>a posteriori</em> a partir de las
+predicciones de los dos modelos según los criterios y definiciones
+elaborados por el equipo). Además, la inversión esta vez se va a
+modelizar con GRP segmentados a nivel fecha (diaria) y cadena.<br> Si
+utilizáramos el <code>mstl</code> el número de modelos a desarrollar
+sería:</p>
+<pre class="r"><code># 30 cadenas * 1 target * 2 kpi
+nrow(expand.grid(c(1:30),c(1:2)))</code></pre>
+<pre><code>## [1] 60</code></pre>
+<p>Y si si eligiéramos descomponer las franjas por separado, el numero
+de modelos a desarrollar sería:</p>
+<pre class="r"><code># 30 cadenas * 1 target * 2 kpi * 6 franjas
+nrow(expand.grid(c(1:30),c(1:6)))*2</code></pre>
+<pre><code>## [1] 360</code></pre>
+<p>El coste computacional seguiría siendo inferior al original aunque
+eligiéramos la descomposición temporal por franjas.<br><br> <b><u>La
+recomendación para el desarrollo del proyecto es realizar un modelo por
+combinación cadena-franja.</b></u></p>
 </div>
 
 
