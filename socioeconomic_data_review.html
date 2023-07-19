@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>socioeconomic_data</title></head>
+<body>
+  
+<h1>Variables socioeconómicas</h1>
+
+En este apartado se realizan dos análisis de los datos del contexto económico y social y sus relaciones con los KPI de la televisión, audiencia (minutos de consumo) y GRP:
+<ul>
+<li><a href="EDA_socioeconomicas.html" target="_blank">datos económicos ↗</a></li>
+<li><a href="EDA_covid.html" target="_blank">COVID-19 ↗</a></li>
+</ul>
+Ambos análisis se realizan con los datos de <code>TTV</code> (total TV). De análisis anteriores sabemos que GRP y audiencia manifiestan dinámicas diferentes según la cadena y según la franja. Sin embargo, realizar el análisis por cadena y franja, y extraer conclusiones claras y aplicables para la modelización del Foresightv, significaría reiterarlo muchas veces y resultaría muy arduo incluso si se limitase a las combinaciones cadena-franja más importantes. Por otro lado, estas variables están en una macro-escala, por eso consideramos que sus efectos se deberían analizar con el total TV: de este análisis obtenemos unos aprendizajes generales que nos ayudan a dar un fundamento lógico al criterio con el cual se introducen estas variables en los modelos.
+
+<h2>COVID-19</h2>
+
+El efecto de la pandemia de COVID-19 se analiza con el número diario de contagios en España (fuente: Red Nacional de Vigilancia Epidemiológica, <a href=https://cnecovid.isciii.es/covid19/ target="_blank">https://cnecovid.isciii.es/covid19/</a>). <br>
+El impacto de la pandemia en la televisión fue muy significativo, pero cambió a lo largo del tiempo. La primera ola de contagios llevó al confinamiento, que generó un cambio súbito y drástico en los patrones de GRP y audiencia. Sin embargo, las siguientes olas ocurrieron en un contexto social distinto, y no volvió a producirse un confinamiento como el primero. Además, el número de contagios registrados por la Red Nacional de Vigilancia Epidemiológica sube mucho en la última ola. Por ello, <b>el peso de la variable debería cambiar en el tiempo, y los modelos deberían tener no una sino varias variables</b>, cada una con un segmento de la serie de contagios.
+
+<h2>Variables socioeconómicas</h2>
+
+Las variables de este análisis son las que se utilizaron en el primer desarrollo del Foresightv: el número de afiliados a la seguridad social, el IPC y el ICC (índice de confianza de los consumidores). En este nuevo desarrollo, además, se añade el coste de los GRP, cuya variabilidad en el tiempo influye en las negociaciones para la emisión de anuncios en TV, y se supone que la inflación en el mercado de los anuncios televisados sigue unas dinámicas que no se pueden describir adecuadamente con el IPC.<br><br>
+Del análisis resulta que en los modelos de los GRP probablemente tendrá más importancia la nueva variable del coste que el IPC, <b>confirmando la suposición en base a la cual se introduce esta nueva variable</b>. Además, las relaciones con las otras variables económicas, en principio, no generan grandes dudas, ya que la serie de GRP es el resultado de negociaciones entre cadenas y anunciantes y agencias de medios, y estas negociaciones se realizan en un contexto económico cuyas dinámicas pueden tener un efecto en el negocio de la publicidad televisada.<br><br>
+Las <b>conclusiones del análisis de la audiencia son menos claras y llevan a unas reflexiones</b>: ¿cuál debería ser el rol de las variables macroeconómicas contempladas en la variabilidad de la audiencia? ¿es de esperar, <i>a priori</i>, una influencia de estas variables en el comportamiento de las personas en cuanto a consumo de televisión?<br>
+En el análisis se realizan unos modelos de regresión exploratorios que devuelven unas predicciones de audiencia bastante precisas con alta significatividad de IPC, afiliación, costes de los GRP e ICC. Sin embargo, una reflexión sobre estas significatividades lleva a pensar que quizá se deban a unas correlaciones sin relación causa-efecto, por ejemplo: ¿la audiencia está bajando porque sube el empleo o la inflación? ¿O la audiencia está bajando por otras razones y la supuesta relación causa-efecto que observamos con la subida de IPC y empleo se debería considerar espuria? Asimismo, en los modelos de audiencia debería reconsiderarse la inclusión del coste de los GRP, ya que parece más lógico pensar que ese coste baja en algunos momentos del año porque en esos momentos la audiencia baja, y no al revés.
+
+<h1>Conclusiones</h1>
+
+Tanto en los modelos de los GRP como en los de audiencia, hay efectos significativos del contexto económico y social. Sin embargo, la significatividad de estos efectos varía en el tiempo, y esto tiene consecuencias en los criterios de modelización. Además, se sugiere realizar un pensamiento sobre las variables a incluir en el modelo de audiencia, ya que las variables consideradas devuelven unos resultados que quizá no dependan de mecanismos reales.
+
+</body>
+</html>
